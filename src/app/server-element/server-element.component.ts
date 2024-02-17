@@ -39,6 +39,7 @@ export class ServerElementComponent implements OnInit,
 
 
   constructor() {
+    // console.log('constructor callaed');
     this.serverElements=[];
   }
 

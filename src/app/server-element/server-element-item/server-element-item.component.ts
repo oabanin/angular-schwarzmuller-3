@@ -1,4 +1,4 @@
-import {Component, ContentChild, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-server-element-item',
@@ -7,7 +7,7 @@ import {Component, ContentChild, ElementRef, Input, OnInit, ViewChild} from '@an
   templateUrl: './server-element-item.component.html',
   styleUrl: './server-element-item.component.scss'
 })
-export class ServerElementItemComponent implements OnInit{
+export class ServerElementItemComponent implements OnInit, AfterContentInit{
   @Input('srvElement') element: { type: string, name: string, content: string };
   @Input() name: string;
   @ViewChild('heading', {static: true}) header: ElementRef;
@@ -23,11 +23,17 @@ export class ServerElementItemComponent implements OnInit{
     this.el ={type: '', name: "", content: ''}
   }
 
+
   ngOnInit() {
     //this.header.nativeElement.style.color ="green"
     //this.paragraph.nativeElement.style.background = "yellow"
    // console.dir(this.header.nativeElement);
   }
+  ngAfterContentInit() {
+    // console.log('ngAfterContentInit called!');
+    // console.log('Text Content of paragraph: ' + this.paragraph.nativeElement.textContent);
+  }
+
 
 
 }
