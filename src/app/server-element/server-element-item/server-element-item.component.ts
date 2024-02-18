@@ -1,4 +1,13 @@
-import {AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-element-item',
@@ -10,9 +19,11 @@ import {AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, Vi
 export class ServerElementItemComponent implements OnInit, AfterContentInit{
   @Input('srvElement') element: { type: string, name: string, content: string };
   @Input() name: string;
+  @Input('serverElement') el: { type: string, name: string, content: string };
+
   @ViewChild('heading', {static: true}) header: ElementRef;
   @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef;
-  @Input('serverElement') el: { type: string, name: string, content: string };
+
 
   constructor() {
     console.log('constructor called!');
@@ -23,15 +34,28 @@ export class ServerElementItemComponent implements OnInit, AfterContentInit{
     this.el ={type: '', name: "", content: ''}
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log('ngOnChanges called!');
+    // console.log(changes['name']?.previousValue);
+  }
 
   ngOnInit() {
     //this.header.nativeElement.style.color ="green"
     //this.paragraph.nativeElement.style.background = "yellow"
-   // console.dir(this.header.nativeElement);
+   console.dir('text - '+this.header.nativeElement.innerText);
+    // console.log('ngOnInit');
   }
   ngAfterContentInit() {
     // console.log('ngAfterContentInit called!');
     // console.log('Text Content of paragraph: ' + this.paragraph.nativeElement.textContent);
+  }
+
+  ngAfterViewInit(){
+    console.dir('text - '+this.header.nativeElement.innerText);
+  }
+
+  ngDoCheck(){
+    // console.log('ng docheck log');
   }
 
 
